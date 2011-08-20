@@ -2,7 +2,7 @@
   "author": "Sebastien Chopin <atinux@gmail.com> (https://twitter.com/Atinux)",
   "name": "LiveDraw",
   "description": "Real time drawing application",
-  "version": "0.5",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/Atinux/LiveDraw.git"
