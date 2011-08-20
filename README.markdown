@@ -8,6 +8,7 @@ It just use Node JS ans Socket.IO.
 <pre>
 git clone git@github.com:Atinux/LiveDraw.git
 cd LiveDraw
+npm install .
 node server.js
 </pre>
 
