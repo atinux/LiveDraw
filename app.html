@@ -49,6 +49,9 @@
 		background-color	:	rgb(50,50,70);
 	}
 	.couleur1 {
+		background-color	:	rgb(130,130,130);
+	}
+	.couleur2 {
 		background-color	:	white;
 	}
 	</style>
@@ -57,7 +60,9 @@
 	<h1>Dessinez en temp réel !</h1>
 	<table id="dessin"></table>
 	<input type="button" class="selecteur couleur0" onclick="changeCouleur(0);" value="" />
-	<input type="button" class="selecteur couleur1" onclick="changeCouleur(1);" value="" /><br/>
+	<input type="button" class="selecteur couleur1" onclick="changeCouleur(1);" value="" />
+	<input type="button" class="selecteur couleur2" onclick="changeCouleur(2);" value="" />
+	<br/>
 	Couleur choisie : <input type="button" id="couleurChoisie" class="couleur0" />
 	<script>
 	var couleur = 0; // 0 = .color0, 1 = .color1, etc.
