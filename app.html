@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Application de dessin en temps réel !</title>
+    <script type="text/javascript" src="/socket.io/socket.io.js">
+    <script src="/socket.io/socket.io.js"></script>
+	<style type="text/css">
+	body {
+		background-color	:	rgb(50,50,80);
+		color				:	rgb(240,240,240);
+		text-align			:	center;
+	}
+	table {
+		border-collapse	:	collapse;
+		border			:	5px rgb(100,100,150) solid;
+		width			:	500px;
+		height			:	500px;
+		padding			:	0px;
+		margin			:	auto;
+		margin-bottom	:	10px;
+	}
+	tr {
+		margin	:	0px;
+		padding	:	0px;
+	}
+	td {
+		padding	:	0px;
+		margin	:	0px;
+		width	:	50px;
+		height	:	50px;
+		border	:	1px rgb(120,120,120) dotted;
+		cursor	:	pointer;
+	}
+	.selecteur {
+		width		:	30px;
+		height		:	30px;
+		border		:	2px rgb(20,20,30) solid;
+		cursor		:	pointer;
+		margin-right:	2px;
+		margin-left	:	2px;
+	}
+	#couleurChoisie {
+		width		:	20px;
+		height		:	20px;
+		border		:	2px rgb(20,20,30) solid;	
+	}
+	.couleur0 {
+		background-color	:	rgb(50,50,70);
+	}
+	.couleur1 {
+		background-color	:	white;
+	}
+	</style>
+</head>
+<body>
+	<h1>Dessinez en temp réel !</h1>
+	<table id="dessin"></table>
+	<input type="button" class="selecteur couleur0" onclick="changeCouleur(0);" value="" />
+	<input type="button" class="selecteur couleur1" onclick="changeCouleur(1);" value="" /><br/>
+	Couleur choisie : <input type="button" id="couleurChoisie" class="couleur0" />
+	<script>
+	var couleur = 0; // 0 = .color0, 1 = .color1, etc.
+	function changeCouleur(col) {
+		couleur = col;
+		document.getElementById('couleurChoisie').className = 'couleur'+col;
+	}
+	// Socket.IO
+	var socket = io.connect();
+	// On recupere le dessin !
+	socket.on('recupererDessin', function (dessin) {
+	var html = '';
+	for (var i = 0; i < 10; i++) {
+		html += '<tr>';
+		for (var j = 0; j < 10; j++) {
+			console.log('cellule');
+			html += '<td id="case'+i+j+'" onclick="draw('+i+', '+j+');" class="couleur'+dessin[i * 10 + j]+'"></td>';
+		}
+		html += '</tr>';
+	}
+	document.getElementById('dessin').innerHTML = html;
+	});
+	// Une case a ete coloree !
+	socket.on('caseColoree', function (caseColoree) {
+		IdCase 		= caseColoree.id;
+		couleurCase = caseColoree.couleur;
+		document.getElementById(IdCase).className = 'couleur'+couleurCase;
+	});
+	// On veut dessiner sur une case
+	function draw(i, j) {
+		socket.emit('draw', {'i':i, 'j':j, 'couleur':couleur});
+		document.getElementById('case'+i+j).className = 'couleur'+couleur;
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "author": "Sebastien Chopin <atinux@gmail.com> (https://twitter.com/Atinux)",
+  "name": "LiveDraw",
+  "description": "Real time drawing application",
+  "version": "0.4.10",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Atinux/LiveDraw.git"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+      "socket.io": "= 0.7.9"
+   },
+  "devDependencies": {}
+}
